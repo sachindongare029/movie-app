@@ -27,4 +27,26 @@
   .page__title {
     margin: 0 12px;
   }
+  .movie__list__container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    .movie__wrapper {
+      width: 24%;
+      padding: 5px;
+      .movie__inner {
+        padding: 10px;
+        border: 1px solid #efefef;
+        .movie__image {
+          img {
+            max-width: 100%;
+          }
+        }
+        .movie__ratings {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+  }
 }
