@@ -3,51 +3,36 @@ import axios from 'axios';
 import MovieListSlick from "./MovieListSlick";
 
 function MovieList() {
-  const [cards, setCards] = useState([]);
+  const [latestMovies, setLatest] = useState([]);
+  const [trendingMovies, setTrending] = useState([]);
 
   useEffect(() => {
+    getLatestMovies();
+    getTrendingMovies();
+  }, []);
+
+  function getLatestMovies() {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/movie/now_playing?language=en-US&include_adult=false&api_key=64e5e52b0be480556671e1b5f5e825bd"
+      )
+      .then(res => setLatest(res.data.results))
+      .catch(error => console.log(error));
+  }
+
+  function getTrendingMovies() {
     axios
       .get(
         "https://api.themoviedb.org/3/trending/movie/week?api_key=64e5e52b0be480556671e1b5f5e825bd"
       )
-      .then(res => setCards(res.data.results))
-      .catch(error => console.log(error))
-  }, []);
+      .then(res => setTrending(res.data.results))
+      .catch(error => console.log(error));
+  }
 
   return (
     <div className="container">
-      <div className="movie__container">
-        <div className="page__title">
-          <h2>Latest</h2>
-        </div>
-        <div className="movie__list__container">
-          {cards &&
-            cards.map(card => {
-              return (
-                <div key={card.id} className="movie__wrapper">
-                  <div className="movie__inner">
-                    <div className="movie__image">
-                      <img
-                        src={
-                          "https://image.tmdb.org/t/p/w500/" + card.poster_path
-                        }
-                        alt="Movie Poster"
-                      />
-                    </div>
-                    <div className="movie__name">
-                      <h4>{card.title}</h4>
-                    </div>
-                    <div className="movie__ratings">
-                      <span>{card.vote_average}</span>
-                      <a href="#">Show more</a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-        </div>
-      </div>
-      <MovieListSlick cards={cards} />
+      <MovieListSlick movies={latestMovies} title={"Latest"} />
+      <MovieListSlick movies={trendingMovies} title={"Trending"} />
     </div>
   );
 }

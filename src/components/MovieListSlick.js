@@ -2,8 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import {SampleNextArrow, SamplePrevArrow} from './PrevNextArrows';
 
-const MovieListSlick = ({cards}) => {
-  console.log("cards", cards);
+const MovieListSlick = ({ movies, title }) => {
   var settings = {
     dots: false,
     infinite: true,
@@ -41,27 +40,27 @@ const MovieListSlick = ({cards}) => {
     ]
   };
   return (
-    <div className="container">
-      <h2> Latest </h2>
+    <div className="movie__container">
+      <h2 className="page__title"> { title } </h2>
       <Slider {...settings}>
-        { cards &&
-          cards.map(card => {
+        {movies &&
+          movies.map(movie => {
             return (
-              <div key={card.id} className="movie__wrapper">
+              <div key={movie.id} className="movie__wrapper">
                 <div className="movie__inner">
                   <div className="movie__image">
                     <img
                       src={
-                        "https://image.tmdb.org/t/p/w500/" + card.poster_path
+                        "https://image.tmdb.org/t/p/w500/" + movie.poster_path
                       }
                       alt="Movie Poster"
                     />
                   </div>
                   <div className="movie__name">
-                    <h4>{card.title}</h4>
+                    <h4>{movie.title}</h4>
                   </div>
                   <div className="movie__ratings">
-                    <span>{card.vote_average}</span>
+                    <span>{movie.vote_average}</span>
                     <a href="#">Show more</a>
                   </div>
                 </div>
@@ -71,6 +70,6 @@ const MovieListSlick = ({cards}) => {
       </Slider>
     </div>
   );
-}
+};
 
 export default MovieListSlick;
