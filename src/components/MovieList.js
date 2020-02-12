@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from "react";
 import axios from 'axios';
+import MovieListSlick from "./MovieListSlick";
 
 function MovieList() {
   const [cards, setCards] = useState([]);
@@ -13,7 +14,6 @@ function MovieList() {
       .catch(error => console.log(error))
   }, []);
 
-  console.log("state", cards);
   return (
     <div className="container">
       <div className="movie__container">
@@ -21,31 +21,33 @@ function MovieList() {
           <h2>Latest</h2>
         </div>
         <div className="movie__list__container">
-          {cards && cards.map((card) => {
-            return (
-              <div key={card.id} className="movie__wrapper">
-                <div className="movie__inner">
-                  <div className="movie__image">
-                    <img
-                      src={
-                        "https://image.tmdb.org/t/p/w500/" + card.poster_path
-                      }
-                      alt="Movie Poster"
-                    />
-                  </div>
-                  <div className="movie__name">
-                    <h4>{card.title}</h4>
-                  </div>
-                  <div className="movie__ratings">
-                    <span>{card.vote_average}</span>
-                    <a href="#">Show more</a>
+          {cards &&
+            cards.map(card => {
+              return (
+                <div key={card.id} className="movie__wrapper">
+                  <div className="movie__inner">
+                    <div className="movie__image">
+                      <img
+                        src={
+                          "https://image.tmdb.org/t/p/w500/" + card.poster_path
+                        }
+                        alt="Movie Poster"
+                      />
+                    </div>
+                    <div className="movie__name">
+                      <h4>{card.title}</h4>
+                    </div>
+                    <div className="movie__ratings">
+                      <span>{card.vote_average}</span>
+                      <a href="#">Show more</a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
+      <MovieListSlick cards={cards} />
     </div>
   );
 }

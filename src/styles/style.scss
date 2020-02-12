@@ -50,3 +50,11 @@
     }
   }
 }
+
+.slick-prev:before, .slick-next:before {
+  color: #000 !important;
+}
+
+.slick-list {
+  padding: 0 20px !important;
+}
