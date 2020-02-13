@@ -21,6 +21,11 @@ const MovieInfo = () => {
     backgroundImage:
       "url(https://image.tmdb.org/t/p/original/" + movie.poster_path + ")"
   };
+  if (movie.credits) {
+    var directors = movie.credits.crew.filter(item => {
+      return item.department === "Directing";
+    })
+  }
   return (
     <div className="movie__info__container">
       <div className="movie__banner" style={posterImage}></div>
@@ -34,8 +39,43 @@ const MovieInfo = () => {
             <div className="col-sm-6">
               <section className="movie__card__details">
                 <div className="movie__card__row">
-                  <span>Genre</span>
-                  <span> hello </span>
+                  <strong>Genre</strong>
+                  <span>
+                    {movie.genres &&
+                      movie.genres.map(genre => {
+                        return <span key={genre.id}>{genre.name}, </span>;
+                      })}
+                  </span>
+                </div>
+                <div className="movie__card__row">
+                  <strong>Casts</strong>
+                  <span>
+                    {movie.credits &&
+                      movie.credits.cast.map(cast => {
+                        return (
+                          <a href="#/" key={cast.cast_id}>
+                            {cast.character},{" "}
+                          </a>
+                        );
+                      })}
+                  </span>
+                </div>
+                <div className="movie__card__row">
+                  <strong>Director</strong>
+                  <span>
+                    {directors &&
+                      directors.map(director => {
+                        return (
+                          <span key={director.credit_id}>
+                            {director.name + ", "}
+                          </span>
+                        );
+                      })}
+                  </span>
+                </div>
+                <div className="movie__card__row">
+                  <strong>Popularity</strong>
+                  <span>{movie.popularity}</span>
                 </div>
               </section>
             </div>

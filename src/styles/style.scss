@@ -68,6 +68,12 @@
       background-color: #efefef;
       .movie__card__row {
         padding: 10px;
+        display: flex;
+        strong {
+          min-width: 90px;
+          font-size: 1.2rem;
+          margin-right: 15px;
+        }
       }
     }
   }
