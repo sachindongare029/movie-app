@@ -54,3 +54,21 @@
     }
   }
 }
+
+.movie__info__container {
+  .movie__banner {
+    min-height: 50vh;
+    background-size: cover;
+    background-position: 50%;
+  }
+  .movie__info {
+    padding: 50px 0;
+    .movie__card__details {
+      padding: 10px;
+      background-color: #efefef;
+      .movie__card__row {
+        padding: 10px;
+      }
+    }
+  }
+}

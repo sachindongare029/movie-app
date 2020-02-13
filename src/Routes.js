@@ -11,7 +11,7 @@ const Routes = () => (
     <main className="main">
       <Route exact path={"/"} component={MovieList} />
       <Route exact path={"/Explore"} component={Explore} />
-      <Route exact path={"/:id"} children={<MovieInfo />} />
+      <Route exact path={"/movie/:id"} children={<MovieInfo />} />
     </main>
   </Router>
 );

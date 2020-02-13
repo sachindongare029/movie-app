@@ -62,7 +62,7 @@ const MovieListSlick = ({ movies, title }) => {
                   </div>
                   <div className="movie__ratings">
                     <span>{movie.vote_average}</span>
-                    <Link className="nav-link" to={"/" + movie.id}>
+                    <Link className="nav-link" to={"/movie/" + movie.id}>
                       Show more
                     </Link>
                   </div>

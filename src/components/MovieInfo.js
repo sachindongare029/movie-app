@@ -14,10 +14,36 @@ const MovieInfo = () => {
       .get(url)
       .then(res => setMovie(res.data))
       .catch(error => console.log(error));
-  }, [])
+  }, [id])
 
   console.log("state", movie);
-  return <div>hello {id}</div>;
+  var posterImage = {
+    backgroundImage:
+      "url(https://image.tmdb.org/t/p/original/" + movie.poster_path + ")"
+  };
+  return (
+    <div className="movie__info__container">
+      <div className="movie__banner" style={posterImage}></div>
+      <div className="container">
+        <div className="movie__info">
+          <div className="row">
+            <div className="col-sm-6">
+              <h1>{movie.title}</h1>
+              <p>{movie.overview}</p>
+            </div>
+            <div className="col-sm-6">
+              <section className="movie__card__details">
+                <div className="movie__card__row">
+                  <span>Genre</span>
+                  <span> hello </span>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default MovieInfo;
