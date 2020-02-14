@@ -2,30 +2,44 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import MovieListSlick from "./MovieListSlick";
 
 const MovieInfo = () => {
   let { id } = useParams();
   const [movie, setMovie] = useState([]);
+  const [relatedMovies, setRelatedMovies] = useState([]);
 
   useEffect(() => {
+    fetchMovie(id);
+    fetchRelated(id);
+  }, [id])
+  
+  function fetchMovie(id) {
     var url =
       `https://api.themoviedb.org/3/movie/${id}?api_key=64e5e52b0be480556671e1b5f5e825bd&append_to_response=credits&language=en-US`;
     axios
       .get(url)
       .then(res => setMovie(res.data))
       .catch(error => console.log(error));
-  }, [id])
+  }
+  function fetchRelated(id) {
+    var url = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=64e5e52b0be480556671e1b5f5e825bd&language=en-US&page=1`;
+    axios
+      .get(url)
+      .then(res => setRelatedMovies(res.data.results))
+      .catch(error => console.log(error));
+  }
 
-  console.log("state", movie);
-  var posterImage = {
-    backgroundImage:
-      "url(https://image.tmdb.org/t/p/original/" + movie.poster_path + ")"
-  };
   if (movie.credits) {
     var directors = movie.credits.crew.filter(item => {
       return item.department === "Directing";
     })
   }
+  
+  var posterImage = {
+    backgroundImage:
+      "url(https://image.tmdb.org/t/p/original/" + movie.poster_path + ")"
+  };
   return (
     <div className="movie__info__container">
       <div className="movie__banner" style={posterImage}></div>
@@ -54,7 +68,7 @@ const MovieInfo = () => {
                       movie.credits.cast.map(cast => {
                         return (
                           <a href="#/" key={cast.cast_id}>
-                            {cast.character},{" "}
+                            {cast.name},{" "}
                           </a>
                         );
                       })}
@@ -80,6 +94,9 @@ const MovieInfo = () => {
               </section>
             </div>
           </div>
+        </div>
+        <div className="related__movies">
+          {relatedMovies && <MovieListSlick movies={relatedMovies} title={"Related movies"} />}
         </div>
       </div>
     </div>

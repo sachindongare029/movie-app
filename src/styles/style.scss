@@ -63,16 +63,19 @@
   }
   .movie__info {
     padding: 50px 0;
-    .movie__card__details {
-      padding: 10px;
-      background-color: #efefef;
-      .movie__card__row {
+    .row {
+      margin: 0;
+      .movie__card__details {
         padding: 10px;
-        display: flex;
-        strong {
-          min-width: 90px;
-          font-size: 1.2rem;
-          margin-right: 15px;
+        background-color: #efefef;
+        .movie__card__row {
+          padding: 10px;
+          display: flex;
+          strong {
+            min-width: 90px;
+            font-size: 1.2rem;
+            margin-right: 15px;
+          }
         }
       }
     }

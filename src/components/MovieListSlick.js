@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
-import {SampleNextArrow, SamplePrevArrow} from './PrevNextArrows';
-import { Link } from 'react-router-dom';
+import { SampleNextArrow, SamplePrevArrow } from "./PrevNextArrows";
+import { Link } from "react-router-dom";
 
 const MovieListSlick = ({ movies, title }) => {
   var settings = {
@@ -42,7 +42,7 @@ const MovieListSlick = ({ movies, title }) => {
   };
   return (
     <div className="movie__container">
-      <h2 className="page__title"> { title } </h2>
+      <h2 className="page__title"> {title} </h2>
       <Slider {...settings}>
         {movies &&
           movies.map(movie => {
@@ -60,12 +60,16 @@ const MovieListSlick = ({ movies, title }) => {
                   <div className="movie__name">
                     <h4>{movie.title}</h4>
                   </div>
-                  <div className="movie__ratings">
-                    <span>{movie.vote_average}</span>
-                    <Link className="nav-link" to={"/movie/" + movie.id}>
-                      Show more
-                    </Link>
-                  </div>
+                  {title === "Related movies" ? (
+                    ""
+                  ) : (
+                    <div className="movie__ratings">
+                      <span>{movie.vote_average}</span>
+                      <Link className="nav-link" to={"/movie/" + movie.id}>
+                        Show more
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             );
