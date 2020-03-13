@@ -1,6 +1,6 @@
-import currentUser from "./currentUser";
+import movieReducer from "./movieReducer";
 import { combineReducers } from "redux";
 
-const rootReducer = combineReducers({ currentUser });
+const rootReducer = combineReducers({ movieReducer });
 
 export default rootReducer;

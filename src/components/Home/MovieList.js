@@ -1,24 +1,21 @@
 import React, {useState, useEffect } from "react";
 import axios from 'axios';
-// import { useSelector, useDispatch } from "react-redux";
-// import { setUser } from "../../actions";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchMovies } from "../../actions";
 import MovieListSlick from "./MovieListSlick";
 
 function MovieList() {
   const [latestMovies, setLatest] = useState([]);
   const [trendingMovies, setTrending] = useState([]);
-  // const currentUser = useSelector(state => state.currentUser);
-  // const dispatch = useDispatch();
-
-  // const user = { name: "Raj" };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(setUser(user));
+    // dispatch(fetchMovies());
     getLatestMovies();
     getTrendingMovies();
   }, []);
   
-  // console.log("states ", currentUser);
+  // useSelector(state => console.log("state", state));
 
   function getLatestMovies() {
     axios
