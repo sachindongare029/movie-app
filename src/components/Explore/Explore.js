@@ -13,13 +13,7 @@ function Explore() {
   }, [keyword]);
 
   function fetchSearch(value) {
-    setKeyword(value);
-    if (value === "") {
-      setNoResult(true);
-      return;
-    } else {
-      setNoResult(false);
-    }
+    if (!value) return;
     var url = `https://api.themoviedb.org/3/search/multi?api_key=64e5e52b0be480556671e1b5f5e825bd&include_adult=false&language=en-US&page=1&query=${value}`;
     axios
       .get(url)
@@ -29,6 +23,15 @@ function Explore() {
           : setNoResult(true);
       })
       .catch(error => console.log(error));
+  }
+
+  function handleChange(text) {
+    setKeyword(text);
+    if (text === "") {
+      setNoResult(true);
+    } else {
+      setNoResult(false);
+    }
   }
 
   // console.log("state", searchResults);
@@ -42,7 +45,7 @@ function Explore() {
               className="form-control"
               placeholder="Search movies, actors, genre..."
               value={keyword}
-              onChange={e => fetchSearch(e.target.value)}
+              onChange={e => handleChange(e.target.value)}
             />
           </form>
         </div>
