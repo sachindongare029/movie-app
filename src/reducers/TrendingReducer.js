@@ -1,20 +1,20 @@
-const movieReducer = (state = {}, action) => {
+const TrendingReducer = (state = {}, action) => {
   switch (action.type) {
-    case "LOAD_MOVIE_LOADING": {
+    case "TRENDING_MOVIES_LOADING": {
       return {
         ...state,
         loading: true,
         error: ""
       };
     }
-    case "LOAD_MOVIE_SUCCESS": {
+    case "TRENDING_LOAD_SUCCESS": {
       return {
         ...state,
         data: action.data,
         loading: false
       };
     }
-    case "LOAD_MOVIE_ERROR": {
+    case "TRENDING_LOAD_ERROR": {
       return {
         ...state,
         loading: false,
@@ -26,4 +26,4 @@ const movieReducer = (state = {}, action) => {
   }
 };
 
-export default movieReducer;
+export default TrendingReducer;

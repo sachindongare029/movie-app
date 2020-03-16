@@ -1,21 +1,27 @@
 import React, {useState, useEffect } from "react";
 import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMovies } from "../../actions";
 import MovieListSlick from "./MovieListSlick";
+import {
+  increment,
+  fetchLatestMovies,
+  fetchTrendingMovies
+} from "../../actions";
 
 function MovieList() {
   const [latestMovies, setLatest] = useState([]);
   const [trendingMovies, setTrending] = useState([]);
   const dispatch = useDispatch();
+  const test = useSelector(state => state);
+  console.log("MovieList -> test", test)
 
   useEffect(() => {
-    // dispatch(fetchMovies());
+    dispatch(increment());
+    dispatch(fetchLatestMovies());
+    dispatch(fetchTrendingMovies());
     getLatestMovies();
     getTrendingMovies();
   }, []);
-  
-  // useSelector(state => console.log("state", state));
 
   function getLatestMovies() {
     axios
